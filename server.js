@@ -1,5 +1,6 @@
 // built-in imports node_modules
 import express from 'express';
+import path from 'path';
 
 // application imports
 import { serverListening } from './controllers/messages.controller.js';
@@ -15,15 +16,24 @@ const PORT = process.env.PORT || 8888;
 // Middleware - a simple middleware
 app.use((req, res, next) => {
 	const start = Date.now();
-	next()
+	next();
 	const delta = Date.now() - start;
-	console.log(`${req.method}: ${req.baseUrl}${req.url} ${delta}ms Headers: ${JSON.stringify(req.headers)}`);
+	console.log(
+		`${req.method}: ${req.baseUrl}${
+			req.url
+		} ${delta}ms Headers: ${JSON.stringify(req.headers)}`
+	);
 	// if you dont add this the app will stall need to add next so that other middlewares can
 	// do there work if needed
 	//next();
 });
 // so we want the body of the request to be in json so we can process it
+
 app.use(express.json());
+
+// serving static files
+const staticPath = path.resolve(path.resolve('public'));
+app.use('/site/', express.static(staticPath));
 
 // Router
 app.use('/friends', friendsRouter);
