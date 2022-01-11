@@ -5,7 +5,7 @@ export const showMessage = (req, res) => {
 };
 
 export const getMessage = (req, res) => {
-    const __dirname = path.resolve(path.resolve('public/images'))
+    const __dirname = path.resolve('public/images')
 	const filePath = path.join(__dirname, 'skimountain.jpeg');
     
 	res.sendFile(filePath);

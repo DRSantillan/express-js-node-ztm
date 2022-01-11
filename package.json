@@ -6,7 +6,8 @@
   "author": "Dean <dean@deansantillan.com>",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "hbs": "^4.2.0"
   },
   "scripts": {
     "dev": "nodemon server"

@@ -13,6 +13,14 @@ const app = express();
 // set the port for production and development
 const PORT = process.env.PORT || 8888;
 
+// tell express you are using handlebars templating
+const templatingPath = path.resolve('views');
+app.set('view engine', 'hbs');
+app.set('views', templatingPath);
+
+// so we want the body of the request to be in json so we can process it
+app.use(express.json());
+
 // Middleware - a simple middleware
 app.use((req, res, next) => {
 	const start = Date.now();
@@ -27,13 +35,18 @@ app.use((req, res, next) => {
 	// do there work if needed
 	//next();
 });
-// so we want the body of the request to be in json so we can process it
-
-app.use(express.json());
 
 // serving static files
-const staticPath = path.resolve(path.resolve('public'));
+const staticPath = path.resolve('public');
 app.use('/site/', express.static(staticPath));
+
+// render templates
+app.get('/', (req, res) => {
+	res.render('index', {
+		title: 'French Mountain Ranges',
+		caption: 'On Top of the World',
+	});
+});
 
 // Router
 app.use('/friends', friendsRouter);
