@@ -22,7 +22,33 @@ app.use((req, res, next) => {
 	// do there work if needed
 	next();
 });
+// so we want the body of the request to be in json so we can process it
+app.use(express.json());
 // Routes  ===-===
+
+app.post('/friends', (req, res) => {
+	// grab the posted input
+	let { name } = req.body;
+	// error checking
+	if (!name || name.length === 0) {
+		res.status(400).json({ error: 'You did not provide a name.' });
+	}
+	// create an id for the new record
+	let id = friends.length;
+	// create an object to insert into the friends object
+	const friend = { id, name };
+	// check if the friend object already exists
+	const filteredFriends = friends.filter(friend => friend.name === name);
+	console.log(filteredFriends.length);
+	if (filteredFriends.length > 0) {
+		return res.status(400).json({
+			error: 'The name already exists in the database.',
+		});
+	}
+	friends.push(friend);
+	// return to client.
+	res.status(200).json(friend);
+});
 // friends route
 app.get('/friends', (req, res) => {
 	res.send(friends);
