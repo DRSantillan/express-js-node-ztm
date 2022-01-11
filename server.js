@@ -1,13 +1,14 @@
+// built-in imports node_modules
 import express from 'express';
+
+// application imports
 import { serverListening } from './controllers/messages.controller.js';
-// can also import the whole file like so but I think I prefer the way above.
-// this may also depend on how big the app is...
-//import * as messageController from './controllers/messages.controller.js';
 import friendsRouter from './routes/friends.router.js';
 import messageRouter from './routes/messages.router.js';
 
-// initial the express library to manipulate
+// init the express library to manipulate
 const app = express();
+
 // set the port for production and development
 const PORT = process.env.PORT || 8888;
 
