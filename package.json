@@ -6,11 +6,13 @@
   "author": "Dean <dean@deansantillan.com>",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.17.2",
-    "nodemon": "^2.0.15"
+    "express": "^4.17.2"
   },
   "scripts": {
     "dev": "nodemon server"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
 }

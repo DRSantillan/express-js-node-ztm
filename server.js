@@ -14,6 +14,15 @@ const friends = [
 		name: 'Akira Santillan',
 	},
 ];
+
+// Middleware - a simple middleware
+app.use((req, res, next) => {
+	console.log(`${req.method}: ${req.url} ${req.headers}`);
+	// if you dont add this the app will stall need to add next so that other middlewares can
+	// do there work if needed
+	next();
+});
+// Routes  ===-===
 // friends route
 app.get('/friends', (req, res) => {
 	res.send(friends);
