@@ -1,4 +1,6 @@
-export const insertFriend = friends => (req, res) => {
+import { friends } from '../models/friends.model.js';
+
+export const postFriend = (req, res) => {
 	// grab the posted input
 	let { name } = req.body;
 	// error checking
@@ -22,11 +24,11 @@ export const insertFriend = friends => (req, res) => {
 	res.status(200).json(friend);
 };
 
-export const getFriends = friends => (req, res) => {
+export const getFriends = (req, res) => {
 	res.send(friends);
 };
 
-export const getFriendByID = friends => (req, res) => {
+export const getFriendByID = (req, res) => {
 	// get the id from the params and explicitly convert to a number if using integers as ids
 	const friendId = Number(req.params.friendId);
 	//const friendId = +req.params.friendId;
